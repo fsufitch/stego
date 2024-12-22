@@ -4,7 +4,8 @@
         "dockerfile": "./Containerfile",
         "context": "."
     },
-    "workspaceMount": "type=bind,source=${localWorkspaceFolder},destination=/workspaces/stego,relabel=private",
+
+    "workspaceMount": "type=bind,source=${localWorkspaceFolder},destination=/workspaces/stego,relabel=private,idmap",
     "workspaceFolder": "/workspaces/stego",
 
     "customizations": {
