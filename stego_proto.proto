@@ -1,0 +1,70 @@
+syntax = "proto3";
+
+option go_package = "github.com/fsufitch/stego";
+package stego;
+
+enum Verbosity {
+    VERBOSITY_ERROR = 0;
+    VERBOSITY_WARNING = 1;
+    VERBOSITY_INFO = 2;
+    VERBOSITY_DEBUG = 3;
+}
+
+message EncodeRequest {
+    FileSource container = 10;
+    FileSource payload = 20;
+    FileDestination output = 30;
+
+    StegoOptions options = 40;
+}
+
+message DecodeRequest {
+    FileSource source = 10;
+    FileDestination output = 20;
+    StegoOptions options = 100;
+}
+
+message FileSource {
+    string mimetype = 10;
+    optional string name = 20;
+    oneof contents {
+        bytes raw = 30;
+        string path = 40;
+    }
+    StegoOptions options = 100;
+}
+
+message FileDestination {
+    string mimetype = 10;
+    string path = 20; // or - for stdout
+}
+
+message StegoOptions {
+    optional string passkey = 10;
+    Verbosity verbosity = 20;
+    optional uint32 parallel = 30;
+
+    map<string, string> options = 100;
+}
+
+message StegoCommandMetadata {
+    string name = 10;
+    string description = 20;
+
+    message Support {
+        repeated string inputMimetypes = 10;
+        repeated string outputMimetypes = 20;
+        bool parallel = 30;
+    }
+
+    Support support = 30;
+
+    message Option {
+        string name = 10;
+        bool repeated = 20;
+        string description = 30;
+    }
+
+    repeated Option options = 40;
+
+}
