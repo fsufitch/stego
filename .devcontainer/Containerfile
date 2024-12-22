@@ -8,12 +8,6 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-RUN useradd developer && \
-    echo '%sudo ALL=(ALL:ALL) ALL' > /etc/sudoers.d/developer && \
-    chown -R developer:developer /home/developer
-
-USER developer
-WORKDIR /home/developer
-
-COPY --chown=developer:developer ./bashrc.sh ./.bashrc
-COPY --chown=developer:developer ./ps1.sh ./.bashrc.d/
+WORKDIR /root
+COPY bashrc.sh .bashrc
+COPY bashrc.d .bashrc.d

@@ -4,8 +4,8 @@
         "dockerfile": "./Containerfile",
         "context": "."
     },
-    "workspaceMount": "source=${localWorkspaceFolder},target=/home/developer/stego,type=bind,consistency=cached",
-    "workspaceFolder": "/home/developer/stego",
+    "workspaceMount": "type=bind,source=${localWorkspaceFolder},destination=/workspaces/stego,relabel=private",
+    "workspaceFolder": "/workspaces/stego",
 
     "customizations": {
         "vscode": {
