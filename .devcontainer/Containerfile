@@ -9,10 +9,11 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 RUN useradd developer && \
-    echo '%sudo ALL=(ALL:ALL) ALL' > /etc/sudoers.d/developer
+    echo '%sudo ALL=(ALL:ALL) ALL' > /etc/sudoers.d/developer && \
+    chown -R developer:developer /home/developer
 
 USER developer
 WORKDIR /home/developer
 
-COPY ./bashrc.sh ./.bashrc
-COPY ./ps1.sh ./.bashrc.d/
+COPY --chown=developer:developer ./bashrc.sh ./.bashrc
+COPY --chown=developer:developer ./ps1.sh ./.bashrc.d/
