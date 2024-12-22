@@ -31,3 +31,5 @@ _ps1() {
     printf '$(if [ "$(whoami)" == "root" ]; then echo "#"; else echo "$"; fi)';
     printf "$(_tput sgr0) ";
 }
+
+PS1="$(_ps1)";
