@@ -1,1 +1,2 @@
-# stego
+# `stego` &mdash; Easy Steganography
+
